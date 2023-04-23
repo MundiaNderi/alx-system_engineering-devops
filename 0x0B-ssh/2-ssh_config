@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configure the SSH configuration file for the local SSH client.
+# Configure it to our needs so that we can connect without typing a
+# password.
+# SSH client configuration must be configured to use the private key ~/.ssh/school
+# It must be configured to refuse to authenticate using a password.
+
+Host 170335-web-01
+User ubuntu
+HostName 107.22.143.207 
+IdentityFile ~/.ssh/holberton
+PasswordAuthentication no
