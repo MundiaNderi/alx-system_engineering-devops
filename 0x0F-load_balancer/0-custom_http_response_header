@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-# Configure an Nginx server and add HTTP header response
+# configure web-02 to be identical to web-01:add a custom Nginx response header
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow 'NGINX HTTP'
-sudo echo 'Holberton School' > /var/www/html/index.nginx-debian.html
-sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-sudo sed -i '/listen 80 default_server;/a add_header X-Served-By $hostname;' /etc/nginx/sites-available/default
-sudo service nginx start
+apt-get update
+apt-get -y install nginx
+sed -ie "s/^server {$/server {\n\tadd_header X-Served-By $HOSTNAME;/g" /etc/nginx/sites-available/default
+service nginx restart
