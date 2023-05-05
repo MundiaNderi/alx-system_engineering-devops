@@ -3,5 +3,11 @@
 
 apt-get update
 apt-get -y install nginx
-sed -ie "s/^server {$/server {\n\tadd_header X-Served-By $170335-web-02;/g" /etc/nginx/sites-available/default
+echo "Hostname: $170335-web-02"
+echo "Hostname: $170335-web-01"
+sed -ie "s/^server {$/server {\n\tadd_header X-Served-By $HOSTNAME;/g" /etc/nginx/sites-available/default
+echo "Before:"
+cat /etc/nginx/sites-available/default
+echo "After:"
+cat /etc/nginx/sites-available/default
 service nginx restart
