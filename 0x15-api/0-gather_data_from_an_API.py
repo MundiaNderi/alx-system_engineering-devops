@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Write a Python script that, using this REST API, for a given employee ID,
+"""Write a Python script that, using this REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
 import requests
@@ -8,46 +7,17 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    """
-    This module calls a RESTful API to retrieve employee information and their completed tasks.
-    Usage: python module_name.py employee_id
-    """
-
-    if len(argv) != 2:
-        print("Command takes 2 arguments")
-        exit
-
-    _id = argv[1]
-
-    # Retrieve employee information
-    employee_url = "https://jsonplaceholder.typicode.com/users/{}".format(_id)
-    employee_req = requests.get(employee_url)
-    employee_data = employee_req.json()
-    name = employee_data['name']
-
-    # Retrieve tasks information
-    tasks_url = "https://jsonplaceholder.typicode.com/todos"
-    tasks_req = requests.get(tasks_url)
-    tasks_data = tasks_req.json()
-
-    tasks = []
-    completed_tasks = []
-
-    # Filter tasks for the given employee ID
-    for task in tasks_data:
-        if task['userId'] == int(_id):
-            tasks.append(task)
-
-    total_tasks = len(tasks)
-
-    # Filter completed tasks
-    for task in tasks:
-        if task['completed'] is True:
-            completed_tasks.append(task)
-
-    # Print employee's name and completed tasks
-    print("Employee {} is done with tasks({}/{}):".format(name,
-          len(completed_tasks), total_tasks))
-
-    for task in completed_tasks:
-        print("\t {}".format(task['title']))
+    userId = argv[1]
+    name = requests.get('https://jsonplaceholder.typicode.com/users/{}'
+                        .format(userId)).json()
+    # todo variable = grabs all todos (completed or not) for the user passed in
+    todo = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
+                        .format(userId)).json()
+    completed = []
+    for task in todo:
+        if task.get('completed') is True:
+            completed.append(task.get('title'))
+    print("Employee {} is done with tasks({}/{}):".
+          format(name.get('name'), len(completed), len(todo)))
+    for task in completed:
+        print("\t {}".format(task))
