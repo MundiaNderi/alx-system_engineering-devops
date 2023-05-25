@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-# Module that calls RESTful API and exports to JSON file for all users
+"""
+contains a python script that, using the JSONplaceholder API, for a given
+employee ID, returns all tasks from all employees, in JSON format
+"""
+
 import json
 import requests
 from sys import argv

@@ -1,15 +1,17 @@
 #!/usr/bin/python3
-# Module that calls RESTful API
-
+"""
+Write a Python script that, using this REST API, for a given employee ID,
+returns information about his/her TODO list progress.
+"""
 import requests
 from sys import argv
 
 
 if __name__ == "__main__":
-    '''
+    """
     This module calls a RESTful API to retrieve employee information and their completed tasks.
     Usage: python module_name.py employee_id
-    '''
+    """
 
     if len(argv) != 2:
         print("Command takes 2 arguments")

@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-# Module that calls RESTful API and exports to JSON file
+"""
+contains a python script that, using the JSONplaceholder API, for a given
+employee ID, returns information about employees todo list progress 
+"""
 import json
 import requests
 from sys import argv

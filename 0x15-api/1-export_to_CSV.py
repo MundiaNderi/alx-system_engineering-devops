@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Module that calls RESTful API and exports to CSV file
+"""Exports to-do list information for a given employee ID to CSV format."""
 import csv
 import requests
 from sys import argv
