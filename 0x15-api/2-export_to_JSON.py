@@ -7,7 +7,7 @@ from sys import argv
 
 if __name__ == "__main__":
     '''Gives name of employee and completed tasks and exports as JSON file'''
-    if len(argv) is not 2:
+    if len(argv) != 2:
         print("Command takes 2 arguments")
         exit
     _id = argv[1]

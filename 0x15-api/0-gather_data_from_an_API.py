@@ -1,33 +1,50 @@
 #!/usr/bin/python3
 # Module that calls RESTful API
+
 import requests
 from sys import argv
 
 
 if __name__ == "__main__":
-    '''Gives name of employee and completed tasks'''
+    '''
+    This module calls a RESTful API to retrieve employee information and their completed tasks.
+    Usage: python module_name.py employee_id
+    '''
+
     if len(argv) is not 2:
         print("Command takes 2 arguments")
         exit
+
     _id = argv[1]
-    url = "https://jsonplaceholder.typicode.com/users/{}".format(_id)
-    req = requests.get(url)
-    jreq = req.json()
-    name = jreq['name']
-    url = "https://jsonplaceholder.typicode.com/todos"
-    req = requests.get(url)
-    jreq = req.json()
+
+    # Retrieve employee information
+    employee_url = "https://jsonplaceholder.typicode.com/users/{}".format(_id)
+    employee_req = requests.get(employee_url)
+    employee_data = employee_req.json()
+    name = employee_data['name']
+
+    # Retrieve tasks information
+    tasks_url = "https://jsonplaceholder.typicode.com/todos"
+    tasks_req = requests.get(tasks_url)
+    tasks_data = tasks_req.json()
+
     tasks = []
     completed_tasks = []
-    for i in jreq:
-        if i['userId'] == int(_id):
-            tasks.append(i)
+
+    # Filter tasks for the given employee ID
+    for task in tasks_data:
+        if task['userId'] == int(_id):
+            tasks.append(task)
+
     total_tasks = len(tasks)
-    for i in tasks:
-        if i['completed'] is True:
-            completed_tasks.append(i)
-    print("Employee {} is done with tasks({}/{}):".format(name,
-                                                          len(completed_tasks),
-                                                          total_tasks))
-    for i in completed_tasks:
-        print("\t {}".format(i['title']))
+
+    # Filter completed tasks
+    for task in tasks:
+        if task['completed'] is True:
+            completed_tasks.append(task)
+
+    # Print employee's name and completed tasks
+    print("Employee {} is done with tasks({}/{}):".format(name, len(completed_tasks), total_tasks))
+
+    for task in completed_tasks:
+        print("\t {}".format(task['title']))
