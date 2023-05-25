@@ -11,7 +11,7 @@ if __name__ == "__main__":
     Usage: python module_name.py employee_id
     '''
 
-    if len(argv) is not 2:
+    if len(argv) != 2:
         print("Command takes 2 arguments")
         exit
 
@@ -44,7 +44,8 @@ if __name__ == "__main__":
             completed_tasks.append(task)
 
     # Print employee's name and completed tasks
-    print("Employee {} is done with tasks({}/{}):".format(name, len(completed_tasks), total_tasks))
+    print("Employee {} is done with tasks({}/{}):".format(name,
+          len(completed_tasks), total_tasks))
 
     for task in completed_tasks:
         print("\t {}".format(task['title']))
