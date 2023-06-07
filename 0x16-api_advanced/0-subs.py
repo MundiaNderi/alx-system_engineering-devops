@@ -1,15 +1,26 @@
 #!/usr/bin/python3
-# Finds total subscribers to a subreddit
+"""Module for retrieving the total number of subscribers to a subreddit."""
+
 import requests
 
 
 def number_of_subscribers(subreddit):
-    '''Function that returns total subscriber number'''
+    '''Function that returns the total number of subscribers to a subreddit.
+
+    Args:
+        subreddit (str): The name of the subreddit.
+
+    Returns:
+        int: The total number of subscribers to the subreddit.
+            Returns 0 if the subreddit is not found or an error occurs.
+    '''
     URL = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    USERAGENT = {'User-Agent':
-                 'Unix:com.alx.apiadvanced:task3 (by /u/_mundia_nderi_)'}
+    USERAGENT = {
+        'User-Agent': 'Unix:com.alx.apiadvanced:task0 (by /u/_mundia_nderi_)'}
     req = requests.get(URL, headers=USERAGENT)
-    if req.status_code is not 200:
-        return (0)
+
+    if req.status_code != 200:
+        return 0
+
     jreq = req.json()
-    return (jreq['data']['subscribers'])
+    return jreq['data']['subscribers']
