@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-"""Module for retrieving a list of titles for hot articles in a subreddit recursively."""
+"""Module for retrieving a list of titles for hot articles
+in a subreddit recursively."""
 
 import requests
 
 
 def recurse(subreddit, hot_list=[], count=0, after_val=None):
-    '''Returns a list of titles for hot articles in a subreddit using recursive calls.
+    '''Returns a list of titles for hot articles in a subreddit
+    using recursive calls.
 
     Args:
         subreddit (str): The name of the subreddit.
-        hot_list (list, optional): A list to store the titles of hot articles. Default is an empty list.
-        count (int, optional): The number of recursive calls made. Default is 0.
-        after_val (str, optional): The value used for pagination. Default is None.
+        hot_list (list, optional): A list to store the titles of hot
+        articles. Default is an empty list.
+        count (int, optional): The number of recursive calls made.
+        Default is 0.
+        after_val (str, optional): The value used for pagination.
+        Default is None.
 
     Returns:
         list: A list of titles for hot articles in the subreddit.
